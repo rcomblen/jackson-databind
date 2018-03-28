@@ -445,13 +445,13 @@ public class MapDeserializer
         }
         
         for (; keyStr != null; keyStr = p.nextFieldName()) {
-            Object key = keyDes.deserializeKey(keyStr, ctxt);
-            // And then the value...
-            JsonToken t = p.nextToken();
             if (_ignorableProperties != null && _ignorableProperties.contains(keyStr)) {
                 p.skipChildren();
                 continue;
             }
+            Object key = keyDes.deserializeKey(keyStr, ctxt);
+            // And then the value...
+            JsonToken t = p.nextToken();
             try {
                 // Note: must handle null explicitly here; value deserializers won't
                 Object value;
